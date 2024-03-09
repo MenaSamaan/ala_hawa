@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1071413048599",
+    "project_id": "ala-hawa",
+    "storage_bucket": "ala-hawa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071413048599:android:999f5dbd2debaa7b477352",
+        "android_client_info": {
+          "package_name": "com.mysecondhometv.ala_hawa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaXQr_jEU11ztliweoYT2zNqVl3yp21DE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
