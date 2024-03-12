@@ -1,4 +1,4 @@
-import 'package:ala_hawa/rss_feed_repository/src/models/rss_feed_item.dart';
+import 'package:ala_hawa/rss_feed_app/repository_layer/repository_layer.dart';
 import 'package:flutter/material.dart';
 
 class RssFeedCard extends StatelessWidget {

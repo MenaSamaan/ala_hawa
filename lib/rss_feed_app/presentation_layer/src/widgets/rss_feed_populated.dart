@@ -1,5 +1,5 @@
-import 'package:ala_hawa/assets/post_card.dart';
-import 'package:ala_hawa/rss_feed/rss_feed.dart';
+import 'package:ala_hawa/assets/rss_feed_card.dart';
+import 'package:ala_hawa/rss_feed_app/business_logic_layer/business_logic_layer.dart';
 import 'package:flutter/material.dart';
 
 class RssFeedPopulated extends StatelessWidget {
@@ -16,17 +16,14 @@ class RssFeedPopulated extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: SingleChildScrollView(
+      child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         clipBehavior: Clip.none,
-        child: ListView.builder(
-          itemCount: rssFeed.rssFeedItems.length,
-          itemBuilder: (context, index) {
-            final rssFeedItem = rssFeed.rssFeedItems[index];
-
-            return RssFeedCard(rssFeedItem: rssFeedItem);
-          },
-        ),
+        itemCount: rssFeed.rssFeedItems.length,
+        itemBuilder: (context, index) {
+          final rssFeedItem = rssFeed.rssFeedItems[index];
+          return RssFeedCard(rssFeedItem: rssFeedItem);
+        },
       ),
     );
   }

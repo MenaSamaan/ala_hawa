@@ -1,17 +1,18 @@
 import 'dart:async';
-
-import 'package:ala_hawa/bbc_rss_feed/bbc_rss_feed.dart';
-import 'package:ala_hawa/rss_feed_repository/rss_feed_repository.dart';
+import 'package:ala_hawa/rss_feed_app/data_layer/data_layer.dart';
+import 'package:ala_hawa/rss_feed_app/repository_layer/repository_layer.dart';
 import 'package:webfeed/webfeed.dart';
 
 class RssFeedRepository {
   RssFeedRepository({BbcRssFeedClient? rssFeedClient})
-      : _rssFeedClient = rssFeedClient ?? BbcRssFeedClient();
+      : _rssFeedClient = rssFeedClient ?? BbcRssFeedClient() {
+    _initializeFeed();
+  }
 
   final BbcRssFeedClient _rssFeedClient;
   late RssFeed _rssFeed;
 
-  Future<void> initializeFeed() async {
+  Future<void> _initializeFeed() async {
     _rssFeed = await _rssFeedClient.getFeed();
   }
 

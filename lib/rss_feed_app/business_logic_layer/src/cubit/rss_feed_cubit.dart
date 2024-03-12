@@ -1,4 +1,5 @@
-import 'package:ala_hawa/rss_feed/rss_feed.dart';
+import 'package:ala_hawa/rss_feed_app/repository_layer/repository_layer.dart';
+import 'package:ala_hawa/rss_feed_app/business_logic_layer/business_logic_layer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,8 +14,8 @@ class RssFeedCubit extends Cubit<RssFeedState> {
     emit(state.copyWith(status: RssFeedStatus.loading));
 
     try {
-      await _rssFeedRepository.initializeFeed();
       final rssFeed = RssFeed.fromRepository(_rssFeedRepository);
+
       final rssFeedItems = _rssFeedRepository.getItems();
       emit(
         state.copyWith(
@@ -30,8 +31,8 @@ class RssFeedCubit extends Cubit<RssFeedState> {
   Future<void> refreshRssFeed() async {
     if (!state.status.isSuccess) return;
     if (state.rssFeed == RssFeed.empty) return;
+    emit(state.copyWith(status: RssFeedStatus.loading));
     try {
-      await _rssFeedRepository.initializeFeed();
       final rssFeed = RssFeed.fromRepository(_rssFeedRepository);
       final rssFeedItems = _rssFeedRepository.getItems();
       emit(
@@ -41,7 +42,7 @@ class RssFeedCubit extends Cubit<RssFeedState> {
         ),
       );
     } on Exception {
-      emit(state);
+      emit(state.copyWith(status: RssFeedStatus.failure));
     }
   }
 }
