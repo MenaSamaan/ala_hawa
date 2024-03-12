@@ -5,14 +5,12 @@ import 'package:webfeed/webfeed.dart';
 
 class RssFeedRepository {
   RssFeedRepository({BbcRssFeedClient? rssFeedClient})
-      : _rssFeedClient = rssFeedClient ?? BbcRssFeedClient() {
-    _initializeFeed();
-  }
+      : _rssFeedClient = rssFeedClient ?? BbcRssFeedClient();
 
   final BbcRssFeedClient _rssFeedClient;
   late RssFeed _rssFeed;
 
-  Future<void> _initializeFeed() async {
+  Future<void> initializeFeed() async {
     _rssFeed = await _rssFeedClient.getFeed();
   }
 

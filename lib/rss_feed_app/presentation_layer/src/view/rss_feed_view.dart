@@ -12,7 +12,7 @@ class RssFeedView extends StatefulWidget {
 class _RssFeedViewState extends State<RssFeedView> {
   @override
   void initState() {
-    context.read<RssFeedCubit>().getRssFeed();
+    context.read<RssFeedCubit>().initialize();
     super.initState();
   }
 

@@ -6,9 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'rss_feed_state.dart';
 
 class RssFeedCubit extends Cubit<RssFeedState> {
-  final RssFeedRepository _rssFeedRepository;
+  RssFeedRepository _rssFeedRepository;
 
   RssFeedCubit(this._rssFeedRepository) : super(RssFeedState());
+
+  Future<void> initialize() async {
+    await _rssFeedRepository.initializeFeed();
+    await getRssFeed();
+  }
 
   Future<void> getRssFeed() async {
     emit(state.copyWith(status: RssFeedStatus.loading));
@@ -29,10 +34,9 @@ class RssFeedCubit extends Cubit<RssFeedState> {
   }
 
   Future<void> refreshRssFeed() async {
-    if (!state.status.isSuccess) return;
-    if (state.rssFeed == RssFeed.empty) return;
     emit(state.copyWith(status: RssFeedStatus.loading));
     try {
+      await _rssFeedRepository.initializeFeed();
       final rssFeed = RssFeed.fromRepository(_rssFeedRepository);
       final rssFeedItems = _rssFeedRepository.getItems();
       emit(
